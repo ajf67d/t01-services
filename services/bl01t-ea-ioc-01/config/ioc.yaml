@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ioc-generic/releases/download/2025.12.1/ibek.ioc.schema.json
+
+# TODO replace above with the generic IOC schema this IOC is based on
+ioc_name: "{{ _global.get_env('IOC_NAME') }}"
+
+description: REPLACE_WITH_DESCRIPTION
+
+entities:
+  - type: epics.EpicsEnvSet
+    name: EPICS_TZ
+    value: GMT0BST
+    
+  - type: epics.EpicsEnvSet
+    name: STREAM_PROTOCOL_PATH
+    value: /epics/runtime/protocol/
+
+  - type: devIocStats.iocAdminSoft
+    IOC: "{{ ioc_name | upper }}"
+
+  - type: epics.StartupCommand
+    command: dbLoadRecords(/epics/ioc/config/exercise1.template, "USER=ajf67,FRST=0.1 Hz,FRVL=1,FVST=FREEZE,FVVL=0,ONST=1 Hz,ONVL=10,PREC=4,THST=0.2 Hz,THVL=2,TWST=0.5 Hz,TWVL=5,ZRST=2 Hz,ZRVL=20")
+    
+
+
+
+  # - todo: Add more entities to make a meaningful IOC

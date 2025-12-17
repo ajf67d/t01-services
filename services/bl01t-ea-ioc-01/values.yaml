@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=../../.helm-shared/values.schema.json
+
+ioc-instance:
+  image: ghcr.io/epics-containers/ioc-generic-runtime:2025.12.1
+
+  # mount in the beamline data folder
+  # dataVolume:
+  #   pvc: false
+  #   hostPath: /dls/ixx/data
+  

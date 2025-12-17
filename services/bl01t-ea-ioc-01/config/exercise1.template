@@ -1,0 +1,75 @@
+# % macro, USER, FedID
+# % macro, PREC, Precision
+# % macro, ZRVL, Zero  state value
+# % macro, ONVL, One   state value
+# % macro, TWVL, Two   state value
+# % macro, THVL, Three state value
+# % macro, FRVL, Four  state value
+# % macro, FVVL, Five  state value
+# % macro, ZRST, Zero  state string
+# % macro, ONST, One   state string
+# % macro, TWST, Two   state string
+# % macro, THST, Three state string
+# % macro, FRST, Four  state string
+# % macro, FVST, Five  state string
+
+record(calc, "$(USER):function") {
+  field(SCAN, "Passive")
+  field(CALC, "A+B*SIN(2*3.14159*C*D/10)")
+  field(INPA, "$(USER):offset")
+  field(PREC, "$(PREC)")
+  field(INPB, "$(USER):amplitude")
+  field(INPC, "$(USER):freqCalc")
+  field(INPD, "$(USER):counter")
+}
+
+record(calc, "$(USER):counter") {
+  field(SCAN, ".1 second")
+  field(FLNK, "$(USER):function")
+  field(CALC, "A+1")
+  field(INPA, "$(USER):counter")
+}
+
+record(ao, "$(USER):offset") {
+  field(PREC, "$(PREC)")
+  field(VAL, "0.0")
+}
+
+record(ao, "$(USER):amplitude") {
+  field(PREC, "$(PREC)")
+  field(VAL, "1.000000")
+}
+
+record(calc, "$(USER):freqCalc") {
+  field(CALC, "A/10")
+}
+
+record(mbbo, "$(USER):frequency") {
+  field(SCAN, "Passive")
+  field(DTYP, "Raw Soft Channel")
+  field(ZRVL, "$(ZRVL)")
+  field(ONVL, "$(ONVL)")
+  field(TWVL, "$(TWVL)")
+  field(THVL, "$(THVL)")
+  field(ZRST, "$(ZRST)")
+  field(ONST, "$(ONST)")
+  field(TWST, "$(TWST)")
+  field(THST, "$(THST)")
+  field(FRVL, "$(FRVL)")
+  field(FRST, "$(FRST)")
+  field(OUT,  "$(USER):freqCalc.A PP")
+  field(FVVL, "$(FVVL)")
+  field(FVST, "$(FVST)")
+}
+
+record(waveform, "$(USER):waveform") {
+  field(FTVL, "CHAR")
+  field(NELM, "128")
+}
+
+record(aSub, "$(USER):aSubExample") {
+  field(SCAN, "1 second")
+  field(INAM, "initRoutine")
+  field(SNAM, "processRoutine")
+  field(FTVA, "LONG")
+}
